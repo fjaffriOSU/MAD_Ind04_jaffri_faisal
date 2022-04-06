@@ -1,16 +1,19 @@
 <?php
 
 // Database Connection
+//I wrote this script after looking at the following blog post
+//https://techarise.com/build-simple-rest-api-with-php-mysql/
 class DBConnection {
     private $_dbHostname = "cs.okstate.edu";
     private $_dbName = "fjaffri";
     private $_dbUsername = "fjaffri";
     private $_dbPassword = "muddyF@ct59";
     private $_con;
+    //private $_con;
  
     public function __construct() {
         try {
-            $this->_con = new PDO("mysql:host=$this->_dbHostname;dbname=$this->_dbName", $this->_dbUsername, $this->_dbPassword);    
+            $this->_con = new PDO("mysql:host=$this->_dbHostname;dbname=$this->_dbName", $this->_dbUsername, $this->_dbPassword);
             $this->_con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch(PDOException $e) {
             echo "Connection failed: " . $e->getMessage();
@@ -22,7 +25,7 @@ class DBConnection {
         return $this->_con;
     }
 }
-class States 
+class States
 {
     protected $db;
     private $name;
@@ -57,8 +60,7 @@ class States
 
 }
 
-            $state = new States();  
-
+        $state = new States();
         $stateInfo = $state->getAllStates();
         if(!empty($stateInfo)) {
           $js_encode = json_encode(array('status'=>TRUE, 'stateInfo'=>$stateInfo), true);

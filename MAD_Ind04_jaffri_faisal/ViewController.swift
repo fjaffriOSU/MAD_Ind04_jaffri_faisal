@@ -36,7 +36,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         return self.responseFromDB.count
     }
-    
+    // Populating tableview with response returned by the API
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell.init(style: .subtitle, reuseIdentifier: "myCell")
         cell.textLabel?.text = self.responseFromDB[indexPath.row].name
@@ -51,6 +51,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     // This function makes an API call, parses the response and save it to a struct array
     func fetchDataFromDatabase(){
+        //url where the PHP script is hosted
         let urlString =  "https://cs.okstate.edu/~fjaffri/read.php"
        
         guard let url = URL(string: urlString)
@@ -62,7 +63,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let task = URLSession.shared.dataTask(with: url)
         { (data, response, error) in
             // Check to see if any error was encountered.
-            print(Thread.current)
             
             guard error == nil  else {
                 print("URL Session error: \(error!)")
